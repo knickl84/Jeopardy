@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="page-A-100.css">
+  
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 32) { 
+                var answer = document.getElementById('answer');
+                if (answer.style.display === 'none') {
+                    answer.style.display = 'block';
+                } else {
+                    answer.style.display = 'none';
+                }
+            } else if (event.keyCode === 13) { 
+                window.location.href = 'index.html'; 
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Nenne 4 Eigenschaften eines Quadrates </h1>
+    <h1 id="answer" style="display: none;">
+        <ul>
+<li>Gegenüberliegende Seiten sind gleich lang</li>
+<li>Es gibt 4 rechte Winkel</li>
+<li>Die Diagonalen sind gleich lang, halbieren einander und schließen einen rechten Winkel ein</li>
+</ul></h1>
+</body>
+</html>
