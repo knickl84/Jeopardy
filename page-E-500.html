@@ -6,20 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="page-A-100.css">
   
-    <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.keyCode === 32) { 
-                var answer = document.getElementById('answer');
-                if (answer.style.display === 'none') {
-                    answer.style.display = 'block';
-                } else {
-                    answer.style.display = 'none';
-                }
-            } else if (event.keyCode === 13) { 
-                window.location.href = 'index.html'; 
-            }
-        });
-    </script>
+    <script src="keydown.js"> </script>
 </head>
 <body>
     <h1>Zur Jause gibt es Aufstrich und Stangenbaguette. Dieses ist 100cm lang. Wie lang ist ein Stück, wenn jedes der 8 Kinder ein gleich großes Stück bekommt?</h1>

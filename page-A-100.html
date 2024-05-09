@@ -6,23 +6,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="page-A-100.css">
   
-    <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.keyCode === 32) { 
-                var answer = document.getElementById('answer');
-                if (answer.style.display === 'none') {
-                    answer.style.display = 'block';
-                } else {
-                    answer.style.display = 'none';
-                }
-            } else if (event.keyCode === 13) { 
-                window.location.href = 'index.html'; 
-            }
-        });
-    </script>
 </head>
 <body>
     <h1>12 . 4 =</h1>
     <h1 id="answer" style="display: none;">48</h1>
+    <script src="keydown.js"> </script>
 </body>
 </html>

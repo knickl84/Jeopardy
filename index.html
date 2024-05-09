@@ -6,69 +6,93 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        
+       
         .green-box {
             background-color: green;
-            width: 50px; 
-            height: 50px; 
+            width: 235px; 
+            height: 98px; 
             display: inline-block; 
-            margin-right: 10px; 
+            display: flex; /* Flexbox-Layout verwenden */
+            align-items: center; /* Zentriere vertikal */
+            justify-content: center; /* Zentriere horizontal */
+           
+        }
+
+        .clicked {
+            background-color: crimson;
         }
     </style>
-   
-   <script>
-       
-    document.addEventListener("DOMContentLoaded", function() {
-       
-        var numberElements = document.querySelectorAll('.number');
-        
-       
-        numberElements.forEach(function(element) {
-            element.classList.add('green-box');
-        });
-    });
-</script>
-
-
-
-        
-
-
-    
-    
 </head>
 <body>
-    <div class="top-container">
-        <div class="no-border">Kopfrechnen</div>
-        <div class="no-border">Dezimalzahlen</div>
-        <div class="no-border">Geometrie</div>
-        <div class="no-border">Maßeinheiten</div>
-        <div class="no-border">Vermischtes</div>
-        <div><div class="number"><a href="page-A-100.html">100</a></div></div>
-        <div><div class="number"><a href="page-B-100.html">100</a></div></div>
-        <div><div class="number"><a href="page-C-100.html">100</a></div></div>
-        <div><div class="number"><a href="page-D-100.html">100</a></div></div>
-        <div><div class="number"><a href="page-E-100.html">100</a></div></div>
-        <div><div class="number"><a href="page-A-200.html">200</a></div></div>
-        <div><div class="number"><a href="page-B-200.html">200</a></div></div>
-        <div><div class="number"><a href="page-C-200.html">200</a></div></div>
-        <div><div class="number"><a href="page-D-200.html">200</a></div></div>
-        <div><div class="number"><a href="page-E-200.html">200</a></div></div>
-        <div><div class="number"><a href="page-A-300.html">300</a></div></div>
-        <div><div class="number"><a href="page-B-300.html">300</a></div></div>
-        <div><div class="number"><a href="page-C-300.html">300</a></div></div>
-        <div><div class="number"><a href="page-D-300.html">300</a></div></div>
-        <div><div class="number"><a href="page-E-300.html">300</a></div></div>
-        <div><div class="number"><a href="page-A-400.html">400</a></div></div>
-        <div><div class="number"><a href="page-B-400.html">400</a></div></div>
-        <div><div class="number"><a href="page-C-400.html">400</a></div></div>
-        <div><div class="number"><a href="page-D-400.html">400</a></div></div>
-        <div><div class="number"><a href="page-E-400.html">400</a></div></div>
-        <div><div class="number"><a href="page-A-500.html">500</a></div></div>
-        <div><div class="number"><a href="page-B-500.html">500</a></div></div>
-        <div><div class="number"><a href="page-C-500.html">500</a></div></div>
-        <div><div class="number"><a href="page-D-500.html">500</a></div></div>
-        <div><div class="number"><a href="page-E-500.html">500</a></div></div>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Kopfrechnen</th>
+                <th>Dezimalzahlen</th>
+                <th>Geometrie</th>
+                <th>Maßeinheiten</th>
+                <th>Vermischtes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="number"><a href="page-A-100.html" class="green-box">100</a></td>
+                <td class="number"><a href="page-B-100.html" class="green-box">100</a></td>
+                <td class="number"><a href="page-C-100.html" class="green-box">100</a></td>
+                <td class="number"><a href="page-D-100.html" class="green-box">100</a></td>
+                <td class="number"><a href="page-E-100.html" class="green-box">100</a></td>
+            </tr>
+            <tr>
+                <td class="number"><a href="page-A-200.html" class="green-box">200</a></td>
+                <td class="number"><a href="page-B-200.html" class="green-box">200</a></td>
+                <td class="number"><a href="page-C-200.html" class="green-box">200</a></td>
+                <td class="number"><a href="page-D-200.html" class="green-box">200</a></td>
+                <td class="number"><a href="page-E-200.html" class="green-box">200</a></td>
+            </tr>
+            <tr>
+                <td class="number"><a href="page-A-300.html" class="green-box">300</a></td>
+                <td class="number"><a href="page-B-300.html" class="green-box">300</a></td>
+                <td class="number"><a href="page-C-300.html" class="green-box">300</a></td>
+                <td class="number"><a href="page-D-300.html" class="green-box">300</a></td>
+                <td class="number"><a href="page-E-300.html" class="green-box">300</a></td>
+            </tr>
+            <tr>
+                <td class="number"><a href="page-A-400.html" class="green-box">400</a></td>
+                <td class="number"><a href="page-B-400.html" class="green-box">400</a></td>
+                <td class="number"><a href="page-C-400.html" class="green-box">400</a></td>
+                <td class="number"><a href="page-D-400.html" class="green-box">400</a></td>
+                <td class="number"><a href="page-E-400.html" class="green-box">400</a></td>
+            </tr>
+            <tr>
+                <td class="number"><a href="page-A-500.html" class="green-box">500</a></td>
+                <td class="number"><a href="page-B-500.html" class="green-box">500</a></td>
+                <td class="number"><a href="page-C-500.html" class="green-box">500</a></td>
+                <td class="number"><a href="page-D-500.html" class="green-box">500</a></td>
+                <td class="number"><a href="page-E-500.html" class="green-box">500</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="resetButton">Reset</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('table a').forEach(function(link) {
+                if(localStorage.getItem(link.href)) {
+                    link.classList.add('clicked');
+                }
+
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    localStorage.setItem(link.href, true);
+                    link.classList.add('clicked');
+                    window.location.href = link.href;
+                });
+            });
+
+            document.getElementById('resetButton').addEventListener('click', function() {
+                localStorage.clear();
+                location.reload();
+            });
+        });
+    </script>
 </body>
 </html>
