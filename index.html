@@ -22,7 +22,7 @@
             border: 1px solid black;
             padding: 0;
             text-align: center;
-            width: 20%; /* Fünf Spalten, jede nimmt 20% der Breite ein */
+            width: 16.66%; /* Adjusted for six columns */
         }
 
         .green-box {
@@ -32,10 +32,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            text-decoration: none;
         }
 
         .number {
-            height: 20%; /* Fünf Zeilen, jede nimmt 20% der Höhe ein */
+            height: 14%; /* Five rows, each taking 20% of the height */
         }
 
         .clicked {
@@ -44,8 +46,33 @@
 
         @media (max-width: 768px) {
             th, td {
-                font-size: 12px; /* Kleinere Schriftgröße für kleine Bildschirme */
+                font-size: 12px; /* Smaller font size for small screens */
             }
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .team input {
+            font-size: x-large;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .team.active {
+            background-color: lightblue; /* Highlight active team */
         }
     </style>
 </head>
@@ -53,6 +80,7 @@
     <table>
         <thead>
             <tr>
+                <th>Teams</th>
                 <th>Kopfrechnen</th>
                 <th>Dezimalzahlen</th>
                 <th>Geometrie</th>
@@ -62,6 +90,14 @@
         </thead>
         <tbody>
             <tr>
+                <td class="team">
+                    <input type="text" placeholder="Team 1">
+                    <div class="points">0</div>
+                    <div class="buttons">
+                        <button class="plus">+</button>
+                        <button class="minus">-</button>
+                    </div>
+                </td>
                 <td class="number"><a href="page-A-100.html" class="green-box">100</a></td>
                 <td class="number"><a href="page-B-100.html" class="green-box">100</a></td>
                 <td class="number"><a href="page-C-100.html" class="green-box">100</a></td>
@@ -69,6 +105,14 @@
                 <td class="number"><a href="page-E-100.html" class="green-box">100</a></td>
             </tr>
             <tr>
+                <td class="team">
+                    <input type="text" placeholder="Team 2">
+                    <div class="points">0</div>
+                    <div class="buttons">
+                        <button class="plus">+</button>
+                        <button class="minus">-</button>
+                    </div>
+                </td>
                 <td class="number"><a href="page-A-200.html" class="green-box">200</a></td>
                 <td class="number"><a href="page-B-200.html" class="green-box">200</a></td>
                 <td class="number"><a href="page-C-200.html" class="green-box">200</a></td>
@@ -76,6 +120,14 @@
                 <td class="number"><a href="page-E-200.html" class="green-box">200</a></td>
             </tr>
             <tr>
+                <td class="team">
+                    <input type="text" placeholder="Team 3">
+                    <div class="points">0</div>
+                    <div class="buttons">
+                        <button class="plus">+</button>
+                        <button class="minus">-</button>
+                    </div>
+                </td>
                 <td class="number"><a href="page-A-300.html" class="green-box">300</a></td>
                 <td class="number"><a href="page-B-300.html" class="green-box">300</a></td>
                 <td class="number"><a href="page-C-300.html" class="green-box">300</a></td>
@@ -83,6 +135,14 @@
                 <td class="number"><a href="page-E-300.html" class="green-box">300</a></td>
             </tr>
             <tr>
+                <td class="team">
+                    <input type="text" placeholder="Team 4">
+                    <div class="points">0</div>
+                    <div class="buttons">
+                        <button class="plus">+</button>
+                        <button class="minus">-</button>
+                    </div>
+                </td>
                 <td class="number"><a href="page-A-400.html" class="green-box">400</a></td>
                 <td class="number"><a href="page-B-400.html" class="green-box">400</a></td>
                 <td class="number"><a href="page-C-400.html" class="green-box">400</a></td>
@@ -90,6 +150,14 @@
                 <td class="number"><a href="page-E-400.html" class="green-box">400</a></td>
             </tr>
             <tr>
+                <td class="team">
+                    <input type="text" placeholder="Team 5">
+                    <div class="points">0</div>
+                    <div class="buttons">
+                        <button class="plus">+</button>
+                        <button class="minus">-</button>
+                    </div>
+                </td>
                 <td class="number"><a href="page-A-500.html" class="green-box">500</a></td>
                 <td class="number"><a href="page-B-500.html" class="green-box">500</a></td>
                 <td class="number"><a href="page-C-500.html" class="green-box">500</a></td>
@@ -101,8 +169,52 @@
     <button id="resetButton">Reset</button>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            let activeTeam = null;
+
+            // Load team names, points, and active team from localStorage
+            function loadTeams() {
+                document.querySelectorAll('.team').forEach((team, index) => {
+                    const teamName = localStorage.getItem(`teamName${index}`);
+                    const teamPoints = localStorage.getItem(`teamPoints${index}`);
+                    if (teamName) {
+                        team.querySelector('input').value = teamName;
+                    }
+                    if (teamPoints) {
+                        team.querySelector('.points').textContent = teamPoints;
+                    }
+                });
+                const activeTeamIndex = localStorage.getItem('activeTeamIndex');
+                if (activeTeamIndex !== null) {
+                    const activeTeamElement = document.querySelectorAll('.team')[activeTeamIndex];
+                    setActiveTeam(activeTeamElement);
+                }
+            }
+
+            // Save team names, points, and active team to localStorage
+            function saveTeams() {
+                document.querySelectorAll('.team').forEach((team, index) => {
+                    const teamName = team.querySelector('input').value;
+                    const teamPoints = team.querySelector('.points').textContent;
+                    localStorage.setItem(`teamName${index}`, teamName);
+                    localStorage.setItem(`teamPoints${index}`, teamPoints);
+                });
+                if (activeTeam) {
+                    const activeTeamIndex = Array.from(document.querySelectorAll('.team')).indexOf(activeTeam);
+                    localStorage.setItem('activeTeamIndex', activeTeamIndex);
+                }
+            }
+
+            // Highlight the active team
+            function setActiveTeam(teamElement) {
+                if (activeTeam) {
+                    activeTeam.classList.remove('active');
+                }
+                activeTeam = teamElement;
+                activeTeam.classList.add('active');
+            }
+
             document.querySelectorAll('table a').forEach(function(link) {
-                if(localStorage.getItem(link.href)) {
+                if (localStorage.getItem(link.href)) {
                     link.classList.add('clicked');
                 }
 
@@ -114,10 +226,54 @@
                 });
             });
 
+            document.querySelectorAll('.team .plus').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const team = button.closest('.team');
+                    let points = parseInt(team.querySelector('.points').textContent);
+                    const activeLink = document.querySelector('a.clicked');
+                    if (activeLink) {
+                        points += parseInt(activeLink.textContent); // Add points from clicked link
+                        localStorage.removeItem(activeLink.href); // Remove link from localStorage
+                        
+                    }
+                    team.querySelector('.points').textContent = points;
+                    saveTeams();
+                });
+            });
+
+            document.querySelectorAll('.team .minus').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const team = button.closest('.team');
+                    let points = parseInt(team.querySelector('.points').textContent);
+                    const activeLink = document.querySelector('a.clicked');
+                    if (activeLink) {
+                        points -= parseInt(activeLink.textContent); // Subtract points from clicked link
+                        if (points < 0) points = 0; // Ensure points don't go negative
+                        localStorage.removeItem(activeLink.href); // Remove link from localStorage
+                        
+                    }
+                    team.querySelector('.points').textContent = points;
+                    saveTeams();
+                });
+            });
+
+            document.querySelectorAll('.team input').forEach(function(input) {
+                input.addEventListener('input', saveTeams); // Save team names on input
+            });
+
+            document.querySelectorAll('.team').forEach(function(team) {
+                team.addEventListener('click', function() {
+                    setActiveTeam(team);
+                    saveTeams();
+                });
+            });
+
             document.getElementById('resetButton').addEventListener('click', function() {
                 localStorage.clear();
                 location.reload();
             });
+
+            loadTeams(); // Initial load of team names and points
         });
     </script>
 </body>
