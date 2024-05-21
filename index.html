@@ -170,6 +170,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let activeTeam = null;
+            let lastClickedPoints = 0; // Store the points of the last clicked link
 
             // Load team names, points, and active team from localStorage
             function loadTeams() {
@@ -222,20 +223,30 @@
                     event.preventDefault();
                     localStorage.setItem(link.href, true);
                     link.classList.add('clicked');
+                    lastClickedPoints = parseInt(link.textContent); // Update the last clicked points
+                    saveLastClickedPoints(lastClickedPoints); // Save the last clicked points to localStorage
                     window.location.href = link.href;
                 });
             });
+
+            // Save the last clicked points to localStorage
+            function saveLastClickedPoints(points) {
+                localStorage.setItem('lastClickedPoints', points);
+            }
+
+            // Load the last clicked points from localStorage
+            function loadLastClickedPoints() {
+                const points = localStorage.getItem('lastClickedPoints');
+                if (points) {
+                    lastClickedPoints = parseInt(points);
+                }
+            }
 
             document.querySelectorAll('.team .plus').forEach(function(button) {
                 button.addEventListener('click', function() {
                     const team = button.closest('.team');
                     let points = parseInt(team.querySelector('.points').textContent);
-                    const activeLink = document.querySelector('a.clicked');
-                    if (activeLink) {
-                        points += parseInt(activeLink.textContent); // Add points from clicked link
-                        localStorage.removeItem(activeLink.href); // Remove link from localStorage
-                        
-                    }
+                    points += lastClickedPoints; // Add points from last clicked link
                     team.querySelector('.points').textContent = points;
                     saveTeams();
                 });
@@ -245,13 +256,8 @@
                 button.addEventListener('click', function() {
                     const team = button.closest('.team');
                     let points = parseInt(team.querySelector('.points').textContent);
-                    const activeLink = document.querySelector('a.clicked');
-                    if (activeLink) {
-                        points -= parseInt(activeLink.textContent); // Subtract points from clicked link
-                        if (points < 0) points = 0; // Ensure points don't go negative
-                        localStorage.removeItem(activeLink.href); // Remove link from localStorage
-                        
-                    }
+                    points -= lastClickedPoints; // Subtract points from last clicked link
+                    if (points < 0) points = 0; // Ensure points don't go negative
                     team.querySelector('.points').textContent = points;
                     saveTeams();
                 });
@@ -274,6 +280,7 @@
             });
 
             loadTeams(); // Initial load of team names and points
+            loadLastClickedPoints(); // Initial load of last clicked points
         });
     </script>
 </body>
